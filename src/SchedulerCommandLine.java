@@ -1,12 +1,12 @@
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import picocli.CommandLine.Option;
 
 @Command(
         name = "Scheduler Solver",
         version = "Scheduler Solver 1.0",
         mixinStandardHelpOptions = true)
-public class SchedulerParams {
+public class SchedulerCommandLine implements Runnable{
     @Parameters(index = "0", description = "The file which contains the di-graph for the scheduling problem")
     private String inputFile;
 
@@ -22,11 +22,12 @@ public class SchedulerParams {
     @Option(names = {"-o"}, description = "The output file name containing the final optimal solution")
     private String outputFile;
 
-    public void displayParams() {
-        System.out.println("Input file: " + inputFile);
-        System.out.println("Number of processors used for scheduling: " + schedulerProcessors);
-        System.out.println("Number of processors used for computing: " + computingProcessors);
-        if (visualizeSearch) System.out.println("This computation will visualize search");
-        System.out.println("Output file: " + (outputFile != null ? outputFile : inputFile.replace(".dot", "-output.dot")));
+    @Override
+    public void run() {
+        System.out.println("Input file: "+inputFile);
+        System.out.println("Number of processors used for scheduling: "+schedulerProcessors);
+        System.out.println("Number of processors used for computing: "+computingProcessors);
+        if(visualizeSearch) System.out.println("This computation will visualize search");
+        System.out.println("Output file: " + (outputFile!=null? outputFile: inputFile.replace(".dot", "-output.dot")));
     }
 }
