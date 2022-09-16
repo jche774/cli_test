@@ -3,7 +3,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
 
 @Command(
-        name = "Scheduler Solver",
+        name = "java -jar scheduler.jar",
         version = "Scheduler Solver 1.0",
         mixinStandardHelpOptions = true)
 public class SchedulerCommandLine implements Runnable{
