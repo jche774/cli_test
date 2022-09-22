@@ -3,23 +3,28 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
 
 @Command(
+        separator = " ",
         name = "java -jar scheduler.jar",
         version = "Scheduler Solver 1.0",
-        mixinStandardHelpOptions = true)
+        mixinStandardHelpOptions = true,
+        abbreviateSynopsis = true,
+        parameterListHeading = "%nParameters: %n",
+        optionListHeading = "%nOptions: %n"
+)
 public class SchedulerCommandLine implements Runnable{
     @Parameters(index = "0", description = "The file which contains the di-graph for the scheduling problem")
     private String inputFile;
 
-    @Parameters(index = "1", description = "The number of processors used in the scheduling problem")
+    @Parameters(index = "1", description = "The number of processors used in the scheduling problem.")
     private int schedulerProcessors;
 
-    @Option(names = {"-p"}, description = "The number of processors used for this computation")
+    @Option(names = {"-p"}, description = "The number of processors used for this computation. If not specified, the computation will be sequential")
     private int computingProcessors = 1;    //default is sequential
 
-    @Option(names = {"-v"}, description = "If added, visualize the search")
+    @Option(names = {"-v"}, description = "If specified, the computation will be visualized")
     private boolean visualizeSearch = false;
 
-    @Option(names = {"-o"}, description = "The output file name containing the final optimal solution")
+    @Option(names = {"-o"}, description = "The output file name containing the final optimal solution, default output file is INPUT-output.dot")
     private String outputFile;
 
     @Override
